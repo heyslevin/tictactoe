@@ -1,0 +1,1 @@
+This is a Tic Tac Toe game for the Odin Project's Javascript curriculum.
