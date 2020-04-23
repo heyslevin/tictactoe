@@ -5,3 +5,10 @@ html,body {
 * {
 	font-family: Graphik Regular;
 }
+
+.squareStyle {
+	height: 100px;
+	width: 100px;
+	background-color: red;
+	position: relative;
+}
