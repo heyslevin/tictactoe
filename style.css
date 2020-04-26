@@ -6,7 +6,31 @@ html,body {
 	font-family: Graphik Regular;
 }
 
+.container {
+	height: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#boardContainer {
+	display:flex;
+	flex-wrap: wrap;
+	align-items: center;
+  	justify-content: center;
+
+  	position:absolute;
+  	margin: 0 auto;
+
+  	width:300px;
+	height:auto;
+}
+
 .squareStyle {
+	display: flex;
+
 	height: 100px;
 	width: 100px;
 	background-color: red;
