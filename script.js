@@ -11,15 +11,46 @@ var boardModule = (() => {
 	const gameFunctions = (() => {
 
 		// Onclick function for board
-		var selection = function playerSelection() {
-			this.innerHTML = "THIS SHIT WORKS"
-		}
+
+		let currentPlayer;
+
+		// Selection module
+		const getPlayer = function getter(){
+
+			switch (currentPlayer) {
+					case undefined:
+						currentPlayer = 1;
+					case 1:
+						console.log(this);
+						this.innerHTML = "1 THIS SHIT WORKS";
+						return currentPlayer = 2;
+					case 2:
+						this.innerHTML = "2 THIS SHIT WORKS"
+						return currentPlayer = 1;
+				}
+
+
+			};
+
 
 		return {
-			selection
-		};
+				getPlayer
+			};
 
-	})();
+		})();
+		
+
+
+
+		// var selection = function playerSelection() {
+		// 	this.innerHTML = "THIS SHIT WORKS"
+		// }
+
+		// return {
+		// 	selection
+		// };
+
+
 
 	//Module: Built board with for each
 
@@ -29,7 +60,7 @@ var boardModule = (() => {
 			let square = document.createElement("div")
 			square.classList.add("squareStyle")
 			square.innerHTML = element
-			square.onclick = gameFunctions.selection;
+			square.addEventListener("click", gameFunctions.getPlayer);
 
 			//Append to board
 			boardContainer.appendChild(square);
@@ -61,7 +92,8 @@ var boardModule = (() => {
 
 
 	return {
-		boardGenerator: boardGenerator,
+		boardGenerator,
+		gameFunctions
 	};
 
 })();
