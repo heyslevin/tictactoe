@@ -4,7 +4,7 @@ var boardModule = (() => {
 
 	//Select div for board
 	let boardContainer = document.querySelector("#boardContainer")
-	let boardArray = ["x","o","x","o","x","o","x","o","x"];
+	let boardArray = ["","","","","","","","",""];
 
 	//Module Player Selection
 
@@ -22,15 +22,69 @@ var boardModule = (() => {
 						currentPlayer = 1;
 					case 1:
 						console.log(this);
-						this.innerHTML = "1 THIS SHIT WORKS";
+						this.innerHTML = player1.getmark();
+						boardArray[this.id] = player1.getmark();
+						winnerCheck(player1);
 						return currentPlayer = 2;
 					case 2:
-						this.innerHTML = "2 THIS SHIT WORKS"
+						this.innerHTML = player2.getmark();
+						boardArray[this.id] = player2.getmark();
+						winnerCheck(player2);
 						return currentPlayer = 1;
+
 				}
 
 
 			};
+
+
+		// Array Checker for winner
+		const winnerCheck = function (player) {
+
+			
+
+			const winnerCombos = [
+				[0,3,6],
+				[0,1,2],
+				[0,4,8],
+				[1,7,4],
+				[3,4,5],
+				[2,4,6],
+				[2,5,8],
+				[6,7,8]
+
+			];
+
+			
+
+			let playerA = boardArray.reduce(function(playerArray,curr,i) {
+
+				if ( curr === player.getmark() ) {
+					playerArray.push(i)
+				}
+
+				return playerArray;
+
+			},[]);
+
+			console.log("The array is " + playerA);
+
+			let playername = player.getname();
+
+
+			for (let i = 0; i < winnerCombos.length; i++) {
+				let winners = winnerCombos[i];
+				if ( winners.every(j => playerA.includes(j)) ) {
+					alert(playername + " wins")
+				}
+			}			
+
+
+
+
+				
+		};
+		
 
 
 		return {
@@ -56,11 +110,13 @@ var boardModule = (() => {
 
 	const boardGenerator = () => {
 
-		boardArray.forEach( element => {
+
+		boardArray.forEach( function(element,i) {
 			let square = document.createElement("div")
 			square.classList.add("squareStyle")
 			square.innerHTML = element
 			square.addEventListener("click", gameFunctions.getPlayer);
+			square.id = i;
 
 			//Append to board
 			boardContainer.appendChild(square);
@@ -93,7 +149,8 @@ var boardModule = (() => {
 
 	return {
 		boardGenerator,
-		gameFunctions
+		gameFunctions,
+		boardArray
 	};
 
 })();
