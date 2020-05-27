@@ -13,6 +13,20 @@ var boardModule = (() => {
 		// Onclick function for board
 
 		let currentPlayer;
+		let spaceChecker = function(id,player,currentBox) {
+			if (boardArray[id] == "") {
+				boardArray[id] = player.getmark();
+				currentBox.innerHTML = player.getmark();
+				winnerCheck(player);
+				if (currentPlayer == 1) {
+					currentPlayer = 2
+				} else {
+					currentPlayer = 1
+				}
+			} else {
+				alert("This space is taken")
+			}
+		};
 
 		// Selection module
 		const getPlayer = function getter(){
@@ -21,16 +35,13 @@ var boardModule = (() => {
 					case undefined:
 						currentPlayer = 1;
 					case 1:
-						console.log(this);
-						this.innerHTML = player1.getmark();
-						boardArray[this.id] = player1.getmark();
-						winnerCheck(player1);
-						return currentPlayer = 2;
+						//Check if board is in use
+						spaceChecker(this.id,player1,this);
+						break;
+
 					case 2:
-						this.innerHTML = player2.getmark();
-						boardArray[this.id] = player2.getmark();
-						winnerCheck(player2);
-						return currentPlayer = 1;
+						spaceChecker(this.id,player2,this);
+						break;
 
 				}
 
@@ -66,8 +77,6 @@ var boardModule = (() => {
 				return playerArray;
 
 			},[]);
-
-			console.log("The array is " + playerA);
 
 			let playername = player.getname();
 
