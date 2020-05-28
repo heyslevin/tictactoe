@@ -10,9 +10,11 @@ html,body {
 	height: 100%;
     padding: 0;
     margin: 0;
+
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-flow:column;
 }
 
 #boardContainer {
@@ -20,8 +22,8 @@ html,body {
 	flex-wrap: wrap;
 	align-items: center;
   	justify-content: center;
+  	order: 1;
 
-  	position:absolute;
   	margin: 0 auto;
 
   	width:306px;
@@ -39,4 +41,25 @@ html,body {
 
 	align-items: center;
 	justify-content: center;
+}
+
+.formContainer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	background-color: gray;
+	width:500px;
+	height: 200px;
+}
+
+.textForm {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 150px;
+	height: 100px;
+	background-color: white;
+	border: 1px solid gray;
 }

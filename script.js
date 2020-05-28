@@ -1,3 +1,28 @@
+var welcomeScreen = (() => {
+
+	let container = document.querySelector('.container');
+	let formContainer = document.createElement("div");
+	formContainer.classList.add("formContainer");
+	container.appendChild(formContainer);
+
+	let formContainerSelector = document.querySelector('.formContainer');
+	
+	let textForm1 = document.createElement("div");
+	textForm1.classList.add('textForm');
+	textForm1.innerHTML = "Player 1";
+
+	let textForm2 = document.createElement("div");
+	textForm2.classList.add('textForm')
+	textForm2.innerHTML = "Player 2";
+
+	formContainerSelector.appendChild(textForm1)
+	formContainerSelector.appendChild(textForm2)
+
+})();
+
+
+
+
 
 //Gameboard array
 var boardModule = (() => {
