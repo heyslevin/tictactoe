@@ -1,25 +1,22 @@
 var welcomeScreen = (() => {
 
-	let container = document.querySelector('.container');
-	let formContainer = document.createElement("div");
-	formContainer.classList.add("formContainer");
-	container.appendChild(formContainer);
+//Query Selectors
 
-	let formContainerSelector = document.querySelector('.formContainer');
-	
-	let textForm1 = document.createElement("div");
-	textForm1.classList.add('textForm');
-	textForm1.innerHTML = "Player 1";
+let submit = document.querySelector("#submit");
 
-	let textForm2 = document.createElement("div");
-	textForm2.classList.add('textForm')
-	textForm2.innerHTML = "Player 2";
+submit.addEventListener("click",checkForm)
 
-	formContainerSelector.appendChild(textForm1)
-	formContainerSelector.appendChild(textForm2)
+function checkForm(e) {
+	e.preventDefault();
+	let player1Form = document.querySelector('input[name="player1"]').value;
+	let player2Form = document.querySelector('input[name="player2"]').value;
+}
+
+
 
 })();
 
+//Form Actions
 
 
 
