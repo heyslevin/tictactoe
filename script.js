@@ -1,74 +1,84 @@
-var welcomeScreen = (() => {
-
-//Query Selectors
-
-let submit = document.querySelector("#submit");
-
-submit.addEventListener("click",checkForm)
-
-function checkForm(e) {
-	e.preventDefault();
-	let player1Form = document.querySelector('input[name="player1"]').value;
-	let player2Form = document.querySelector('input[name="player2"]').value;
-}
-
-
-
-})();
-
-//Form Actions
-
-
-
 
 //Gameboard array
 var boardModule = (() => {
 
+	////////////////////////
+	////////////////////////
+	////////////////////////
+	////////////////////////	
+	//Form Actions
+
+
+	const checkForm = function(player1,player2) {
+
+
+		return function (e) {
+			event.preventDefault();
+			welcomeScreen.player1 = document.querySelector('input[name="player1"]').value;
+			welcomeScreen.player2 = document.querySelector('input[name="player2"]').value;
+
+			console.log(welcomeScreen)
+
+			boardModule.boardGenerator();
+		}
+
+
+
+	}
+
+	const welcomeScreen = (() => {
+
+		//Query Selectors
+
+		let submit = document.querySelector("#submit");
+		let player1Form;
+		let player2Form;
+
+		submit.addEventListener("click",checkForm(player1Form,player2Form))
+			
+		return {
+			player1Form,
+			player2Form,
+		}
+
+
+	})();
+
+
+
+
 	//Select div for board
 	let boardContainer = document.querySelector("#boardContainer")
 	let boardArray = ["","","","","","","","",""];
+	
 
+	////////////////////////
+	////////////////////////
+	////////////////////////
+	////////////////////////	
 	//Module Player Selection
 
 	const gameFunctions = (() => {
 
 		// Onclick function for board
 
-		let currentPlayer;
+		
 		let spaceChecker = function(id,player,currentBox) {
 			if (boardArray[id] == "") {
 				boardArray[id] = player.getmark();
 				currentBox.innerHTML = player.getmark();
 				winnerCheck(player);
-				if (currentPlayer == 1) {
-					currentPlayer = 2
+				if (boardGenerator.currentPlayer == 1) {
+					boardGenerator.currentPlayer = 2
 				} else {
-					currentPlayer = 1
+					boardGenerator.currentPlayer = 1
 				}
 			} else {
 				alert("This space is taken")
 			}
 		};
 
-		// Selection module
-		const getPlayer = function getter(){
 
-			switch (currentPlayer) {
-					case undefined:
-						currentPlayer = 1;
-					case 1:
-						//Check if board is in use
-						spaceChecker(this.id,player1,this);
-						break;
-
-					case 2:
-						spaceChecker(this.id,player2,this);
-						break;
-
-				}
-
-
-			};
 
 
 		// Array Checker for winner
@@ -117,74 +127,114 @@ var boardModule = (() => {
 		};
 		
 
-
 		return {
-				getPlayer
-			};
+			spaceChecker,
+			winnerCheck
+		}
 
-		})();
+
+	})();
 		
 
 
 
-		// var selection = function playerSelection() {
-		// 	this.innerHTML = "THIS SHIT WORKS"
-		// }
-
-		// return {
-		// 	selection
-		// };
-
-
-
+	////////////////////////
+	////////////////////////
+	////////////////////////
+	////////////////////////	
 	//Module: Built board with for each
 
 	const boardGenerator = () => {
+
+
+		let currentPlayer;
 
 
 		boardArray.forEach( function(element,i) {
 			let square = document.createElement("div")
 			square.classList.add("squareStyle")
 			square.innerHTML = element
-			square.addEventListener("click", gameFunctions.getPlayer);
+			square.addEventListener("click", getPlayer);
 			square.id = i;
 
 			//Append to board
 			boardContainer.appendChild(square);
 
 		});
+
+		return {
+			currentPlayer
+		}
 	}
 
+	////////////////////////
+	////////////////////////
+	////////////////////////
+	////////////////////////
+	// Selection module
+	const getPlayer = function getter(){
+
+
+		switch (boardGenerator.currentPlayer) {
+				case undefined:
+					boardGenerator.currentPlayer = 1;
+				case 1:
+					//Check if board is in use
+					gameFunctions.spaceChecker(this.id,boardPlayer.player1,this);
+					break;
+
+				case 2:
+					gameFunctions.spaceChecker(this.id,boardPlayer.player2,this);
+					break;
+
+			}
+
+
+		};	
+
+	////////////////////////
+	////////////////////////
+	////////////////////////
+	////////////////////////	
 	//Module: Build players
 
 	const Player = (name,mark) => {
 		getname = () => name;
 		getmark = () => mark;
 
-		const welcome = person => {
-			console.log(`Welcome to ${person.getname()}`)
-		}
-
 		return {
 			getname,
 			getmark,
-			welcome
 		}
 	}
 
-	player1 = Player("player1","X");
-	player2 = Player("player2","0");
+	const boardPlayer = (() => {
 
+		player1 = Player(welcomeScreen.player1Form,"X");
+		player2 = Player(welcomeScreen.player2Form,"0");
+
+		return {
+			player1,
+			player2
+		}
+
+	})();
+
+
+	////////////////////////
+	////////////////////////
+	////////////////////////
+	////////////////////////	
 	//Module: Square Selector
 
 
 	return {
 		boardGenerator,
 		gameFunctions,
-		boardArray
+		boardArray,
+		welcomeScreen,
+		boardPlayer,
+		getPlayer
 	};
 
 })();
-
-
-boardModule.boardGenerator();
