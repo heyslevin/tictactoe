@@ -14,8 +14,8 @@ var boardModule = (() => {
 
 		return function (e) {
 			event.preventDefault();
-			welcomeScreen.player1 = document.querySelector('input[name="player1"]').value;
-			welcomeScreen.player2 = document.querySelector('input[name="player2"]').value;
+			boardPlayer.player1.setname(document.querySelector('input[name="player1"]').value);
+			boardPlayer.player2.setname(document.querySelector('input[name="player2"]').value);
 
 			console.log(welcomeScreen)
 
@@ -199,19 +199,18 @@ var boardModule = (() => {
 	//Module: Build players
 
 	const Player = (name,mark) => {
-		getname = () => name;
-		getmark = () => mark;
 
 		return {
-			getname,
-			getmark,
+			getmark: function() {return mark},
+			getname: function() {return name},
+			setname: function(value) {name = value}
 		}
 	}
 
 	const boardPlayer = (() => {
 
-		player1 = Player(welcomeScreen.player1Form,"X");
-		player2 = Player(welcomeScreen.player2Form,"0");
+		player1 = Player("Them Titties","X");
+		player2 = Player("Are Titties","0");
 
 		return {
 			player1,
