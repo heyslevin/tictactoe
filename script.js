@@ -19,7 +19,9 @@ var boardModule = (() => {
 
 			console.log(welcomeScreen)
 
-			boardModule.boardGenerator();
+			reset(e);
+			submit.style.visibility = "hidden"
+
 		}
 
 
@@ -31,6 +33,7 @@ var boardModule = (() => {
 		boardContainer.innerHTML = "";
 		boardArray = ["","","","","","","","",""];
 		boardModule.boardGenerator();
+		submit.style.visibility = "visible";
 	}
 
 	const welcomeScreen = (() => {
