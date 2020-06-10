@@ -26,15 +26,24 @@ var boardModule = (() => {
 
 	}
 
+	const reset = function(e) {
+		e.preventDefault();
+		boardContainer.innerHTML = "";
+		boardArray = ["","","","","","","","",""];
+		boardModule.boardGenerator();
+	}
+
 	const welcomeScreen = (() => {
 
 		//Query Selectors
 
 		let submit = document.querySelector("#submit");
+		let clear = document.querySelector("#clear");
 		let player1Form;
 		let player2Form;
 
 		submit.addEventListener("click",checkForm(player1Form,player2Form))
+		clear.addEventListener("click", reset)
 			
 		return {
 			player1Form,
