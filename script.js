@@ -129,6 +129,9 @@ var boardModule = (() => {
 				let winners = winnerCombos[i];
 				if ( winners.every(j => playerA.includes(j)) ) {
 					alert(playername + " wins")
+				} else if (!boardArray.includes("")) {
+					alert("Tie bitches");
+					break;
 				}
 			}			
 
